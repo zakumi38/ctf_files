@@ -62,6 +62,18 @@ class Database {
               (1678295630721, 4, 2, '', 'Bump. Still available. Only selling once.', null);
             `);
   }
+    async createPost(authorId, parentId, title, message, image) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let stmt = await this.db.prepare(
+          "INSERT INTO posts (authorId, parentId, title, message, attachedImage, createdAt) VALUES (?, ?, ?, ?, ?, ?)"
+        );
+        resolve(await stmt.run([authorId, parentId, title, message, image, new Date().getTime()]));
+      } catch (e) {
+        reject(e);
+      }
+    });
+  }
 
   async loginUser(username, password) {
     const hashedPassword = crypto.createHash("md5").update(password).digest("hex");
@@ -118,19 +130,6 @@ class Database {
           "SELECT posts.*, users.username, (SELECT count(*) FROM posts as nested WHERE parentId = posts.id) as replies FROM posts LEFT JOIN users ON posts.authorId = users.id WHERE parentId IS NULL"
         );
         resolve(await stmt.all([]));
-      } catch (e) {
-        reject(e);
-      }
-    });
-  }
-
-  async createPost(authorId, parentId, title, message, image) {
-    return new Promise(async (resolve, reject) => {
-      try {
-        let stmt = await this.db.prepare(
-          "INSERT INTO posts (authorId, parentId, title, message, attachedImage, createdAt) VALUES (?, ?, ?, ?, ?, ?)"
-        );
-        resolve(await stmt.run([authorId, parentId, title, message, image, new Date().getTime()]));
       } catch (e) {
         reject(e);
       }
