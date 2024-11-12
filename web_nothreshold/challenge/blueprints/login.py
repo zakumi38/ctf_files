@@ -17,7 +17,7 @@ def set_2fa_code(d):
 @login_bp.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
-        
+
         username = request.form.get("username")
         password = request.form.get("password")
 
