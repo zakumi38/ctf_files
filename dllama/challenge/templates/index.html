@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DDLLMMAA</title>
+    <style>
+        body {
+            background-color: #0c0c0c; /* Dark background */
+            color: #b3b3b3; /* Light text */
+            font-family: 'Courier New', Courier, monospace; /* Monospaced font */
+            text-align: center; /* Centered content */
+        }
+        h1 {
+            color: #ffffff; /* White header */
+        }
+        textarea {
+            background-color: #1e1e1e; /* Darker background for textarea */
+            color: #b3b3b3; /* Light text */
+            border: 1px solid #333; /* Dark border */
+            padding: 10px;
+            width: 80%;
+            min-height: 200px;
+            font-family: 'Courier New', Courier, monospace; /* Monospaced font */
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50; /* Green button */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049; /* Darker green on hover */
+        }
+        iframe {
+            margin-top: 20px;
+            border: 2px solid #333; /* Dark border */
+            background-color: #1e1e1e; /* Darker background */
+        }
+        .error {
+            color: #ff0000; /* Red error text */
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>DDLLMMAA</h1>
+    <form action="/" method="post">
+        <label for="latex_code">Enter LaTeX code:</label><br>
+        <textarea id="latex_code" name="latex_code" placeholder="Type LaTeX code here..." rows="10" cols="50"></textarea><br>
+        <input type="submit" value="Generate PDF">
+    </form>
+    {% if error %}
+        <div class="error">
+            <h2>Error:</h2>
+            <p>{{ error }}</p>
+        </div>
+    {% elif pdf_file %}
+        <h2>Generated PDF:</h2>
+        <iframe src="{{ pdf_file }}#toolbar=0&navpanes=0" width="800" height="600"></iframe>
+    {% endif %}
+    <p><a href="{{ url_for('logout') }}">Logout</a></p>
+</body>
+</html>
