@@ -84,5 +84,4 @@ class FeedbackController extends Controller
         AdminBot::dispatch();
         return to_route('feedback.create')->with('message', 'Feedback submitted!');
     }
-
 }
