@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
         if ($result) {
             session_start();
             $_SESSION['id']=$result[0]['id'];
-            $_SESSION['username'] = $result[0]['username'];;
+            $_SESSION['username'] = $result[0]['username'];
             header("Location: index.php");
             exit;
         } else {

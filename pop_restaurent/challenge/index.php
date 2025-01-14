@@ -10,6 +10,7 @@ require_once 'Models/DatabaseModel.php';
 
 use Helpers\ArrayHelpers;
 
+
 isAuthenticated();
 $username = $_SESSION['username'];
 $id = $_SESSION['id'];

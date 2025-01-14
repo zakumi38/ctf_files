@@ -6,13 +6,11 @@ require_once 'Models/PizzaModel.php';
 require_once 'Models/IceCreamModel.php';
 require_once 'Models/SpaghettiModel.php';
 require_once 'Models/DatabaseModel.php';
-
 isAuthenticated();
 $username = $_SESSION['username'];
 $id = $_SESSION['id'];
 
 $db = new Database();
-
 $order = unserialize(base64_decode($_POST['data']));
 
 $foodName = get_class($order);
